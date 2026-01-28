@@ -11,8 +11,9 @@ function App() {
   const [tasks, setTask] = useState(JSON.parse(localStorage.getItem('tasks')) || [])
 
   function deleteTask(id) {
-    const newTasks = tasks.filter((task) => task.id !== id)
-    setTask(newTasks)
+    const taskFilter = tasks.filter((task) => task.id !== id)
+    localStorage.setItem('tasks', JSON.stringify(taskFilter))
+    setTask(taskFilter)
   }
 
   function addTask(title){
@@ -22,12 +23,38 @@ function App() {
     setTask(newArray)
   }
 
+  function filterTask(optionSelect){
+    const allTasks = JSON.parse(localStorage.getItem('tasks'))
+    if (optionSelect === 'all') {
+      setTask(allTasks)
+      
+    }else{
+      const filteredTasks = allTasks.filter(task => String(task.done) === optionSelect)
+      setTask(filteredTasks)
+    }
+
+  }
+
+  function modifyTask(id){
+    const allTasks = JSON.parse(localStorage.getItem('tasks'))
+    const allTasksModified = allTasks.map(elem => {
+      if (elem.id === id) {
+        return { 
+          ...elem, 
+          done: !elem.done };
+      }
+      return elem;
+    })
+    localStorage.setItem('tasks', JSON.stringify(allTasksModified))
+    setTask(allTasksModified) 
+  }
+
   return (
     <>
       <Header />
       <CreateTask addTask={addTask} />
-      <FilterTask />
-      <ContainerTask tasks={tasks} deleteTask={deleteTask}/>
+      <FilterTask filterTask={filterTask} />
+      <ContainerTask tasks={tasks} deleteTask={deleteTask} modifyTask={modifyTask}/>
     </>
   )
 }

@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const FilterTask = () => {
+function FilterTask ({ filterTask }) {
+  const [selected, setSelected] = useState('all')
+
+  function onFilterSelected(e) {
+    setSelected(e.target.value)
+    filterTask(e.target.value)
+  }
+
   return (
     <div>
-      
+      <select value={selected} onChange={onFilterSelected}>
+        <option value="all" defaultValue>All</option>
+        <option value="true">Completed</option>
+        <option value="false">Incompleted</option>
+      </select>
     </div>
   )
 }

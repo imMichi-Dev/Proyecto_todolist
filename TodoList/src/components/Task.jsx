@@ -4,6 +4,7 @@ const Task = ({ id, title, done, setTasks, deleteTask }) => {
   return (
     <div>
       <h3 className={ done ? 'bg-primary' : 'bg-info'}>{title}</h3>
+      <button onClick={() => modifyTask(id)}>{done ? 'Completed' : 'Incompleted'}</button>
       <button onClick={() => deleteTask(id)}>Delete</button>
     </div>
   )

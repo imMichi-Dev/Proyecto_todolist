@@ -1,6 +1,6 @@
 import Task from './Task'
 
-const ContainerTask = ({ tasks, setTasks, deleteTask }) => {
+const ContainerTask = ({ tasks, setTasks, deleteTask, modifyTask }) => {
   return (
     <section>
       {tasks.map((tsk) => 
@@ -11,6 +11,7 @@ const ContainerTask = ({ tasks, setTasks, deleteTask }) => {
           done={tsk.done}
           setTasks={setTasks}
           deleteTask={deleteTask}
+          modifyTask={modifyTask}
         />
       )}
     </section>

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const CreateTask = ({ addTask }) => {
-  connst [tittleTask, setTitleTask] = useState('')
+  const [tittleTask, setTitleTask] = useState('')
 
   function addNewTask(e){
     e.preventDefault()
     addTask(tittleTask)
+    setTitleTask('')
   }
 
   return (
